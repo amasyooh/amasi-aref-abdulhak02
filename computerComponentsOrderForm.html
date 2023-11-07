@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Computer Component Order Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: grid;
+      grid-gap: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      width: 100px;
+    }
+
+    input[type="submit"] {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Computer Component Order Form</h1>
+    <form id="orderForm">
+      <label for="cpu">CPU:</label>
+      <input type="text" id="cpu" required>
+      
+      <label for="ram">RAM:</label>
+      <input type="text" id="ram" required>
+      
+      <label for="gpu">GPU:</label>
+      <input type="text" id="gpu" required>
+      
+      <label for="storage">Storage:</label>
+      <input type="text" id="storage" required>
+      
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" min="1" required>
+      
+      <input type="submit" value="Place Order">
+    </form>
+
+    <div id="orderSummary"></div>
+  </div>
+
+  <script>
+    const orderForm = document.getElementById('orderForm');
+    const orderSummary = document.getElementById('orderSummary');
+
+    orderForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const cpu = document.getElementById('cpu').value;
+      const ram = document.getElementById('ram').value;
+      const gpu = document.getElementById('gpu').value;
+      const storage = document.getElementById('storage').value;
+      const quantity = document.getElementById('quantity').value;
+
+      const totalPrice = calculateTotalPrice(quantity);
+
+      const orderDetails = `
+        <h2>Order Summary:</h2>
+        <p>CPU: ${cpu}</p>
+        <p>RAM: ${ram}</p>
+        <p>GPU: ${gpu}</p>
+        <p>Storage: ${storage}</p>
+        <p>Quantity: ${quantity}</p>
+        <p>Total Price: ${totalPrice}</p>
+      `;
+
+      orderSummary.innerHTML = orderDetails;
+    });
+
+    function calculateTotalPrice(quantity) {
+      // Replace this with your own logic to calculate the total price based on the quantity and component prices
+      const componentPrice = 1000; // Assuming each component costs $1000
+      return quantity * componentPrice;
+    }
+  </script>
+</body>
+</html>
